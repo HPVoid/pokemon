@@ -49,47 +49,43 @@ class Pokemon:
 
     def attack(self, pokemon):
         hits = 0
+        multi = 0
         if self.type == "tuner" and pokemon.type == "raver":
-            hits = int(((self.level-1)*2+10)*self.damage["tr"])
-            pokemon.lose_health(hits)
+            multi = self.damage["tr"]
         if self.type == "tuner" and pokemon.type == "gamer":
-            hits = int(((self.level-1)*2+10)*self.damage["tg"])
-            pokemon.lose_health(hits)
+            multi = self.damage["tg"]
         if self.type == "tuner" and pokemon.type == "pumper":
-            hits = int(((self.level-1)*2+10)*self.damage["tp"])
-            pokemon.lose_health(hits)
+            multi = self.damage["tp"]
         if self.type == "raver" and pokemon.type == "tuner":
-            hits = int(((self.level-1)*2+10)*self.damage["rt"])
-            pokemon.lose_health(hits)
+            multi = self.damage["rt"]
         if self.type == "raver" and pokemon.type == "gamer":
-            hits = int(((self.level-1)*2+10)*self.damage["rg"])
-            pokemon.lose_health(hits)
+            multi = self.damage["rg"]
         if self.type == "raver" and pokemon.type == "pumper":
-            hits = int(((self.level-1)*2+10)*self.damage["rp"])
-            pokemon.lose_health(hits)
+            multi = self.damage["rp"]
         if self.type == "gamer" and pokemon.type == "tuner":
-            hits = int(((self.level-1)*2+10)*self.damage["gt"])
-            pokemon.lose_health(hits)
+            multi = self.damage["gt"]
         if self.type == "gamer" and pokemon.type == "raver":
-            hits = int(((self.level-1)*2+10)*self.damage["gr"])
-            pokemon.lose_health(hits)
+            multi = self.damage["gr"]
         if self.type == "gamer" and pokemon.type == "pumper":
-            hits = int(((self.level-1)*2+10)*self.damage["gp"])
-            pokemon.lose_health(hits)
+            multi = self.damage["gp"]
         if self.type == "pumper" and pokemon.type == "tuner":
-            hits = int(((self.level-1)*2+10)*self.damage["pt"])
-            pokemon.lose_health(hits)
+            multi = self.damage["pt"]
         if self.type == "pumper" and pokemon.type == "raver":
-            hits = int(((self.level-1)*2+10)*self.damage["pr"])
-            pokemon.lose_health(hits)
+            multi = self.damage["pr"]
         if self.type == "pumper" and pokemon.type == "gamer":
-            hits = int(((self.level-1)*2+10)*self.damage["pg"])
-            pokemon.lose_health(hits)
+            multi = self.damage["pg"]
         if self.type == pokemon.type:
-            hits = int(((self.level-1)*2+10))
-            pokemon.lose_health(hits)
+            multi = 1
+
+        hits = int(((self.level-1)*2+10)*multi)
 
         print("{} dealt {} damage to {}".format(self.name, hits, pokemon.name))
+        if multi > 1:
+            print("It's super effective!")
+        if multi < 1:
+            print("It's not very effective!")
+
+        pokemon.lose_health(hits)
 
 
 
